@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- URL Details -->
+{% if current_user.is_authenticated and current_user.id == user.id %}
+<h1 class="">Hello {{ user.username }} !</h1>
+{% else %}
+<h1 class="">Users/{{ user.username }}</h1>
+{% endif %}
+<div class="py-5">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pt-5">
+        {% if current_user.is_authenticated and current_user.id == user.id %}
+        <a href="{{ url_for('create_url') }}"><button type="button" class="btn btn-primary">Create</button></a>
+        <a href="{{ url_for('logout', id=user.id) }}"><button type="button" class="btn btn-danger">Logout</button></a>
+        {% endif %}
+    </div>
+
+    <div class="py-5">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Long URL</th>
+                    <th>Short URL</th>
+                    <th>Creation Date</th>
+                    {% if current_user.is_authenticated and current_user.id == user.id %}
+                    <th>Action</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in user.urls %}
+                <tr>
+                    <td>{{ url.id }}</td>
+                    <td><a href="{{ url_for('view_url', id=url.id) }}">{{ url.name }}</a></td>
+                    <td>{{ url.long_url }}</td>
+                    <td><a href="{{ url_for('redirection', hashid=url.short_url.split('/')[-1]) }}" _target="blank">{{ url.short_url }}</a></td>
+                    <td>{{ url.created_date }}</td>
+                    {% if current_user.is_authenticated and current_user.id == user.id %}
+                    <td><a href="{{ url_for('update_url', id=url.id) }}">Edit</a> | <a href="{{ url_for('delete_url', id=url.id) }}">Delete</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- URL Details -->
+<h1 class="">Urls / {{ url.name }}</h1>
+<div class="py-5">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td>{{ url.id }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ url.name }}</td>
+            </tr>
+            <tr>
+                <td>Long URL</td>
+                <td>{{ url.long_url }}</td>
+            </tr>
+            <tr>
+                <td>Short URL</td>
+                <td><a href="{{ url.short_url }}" _target="blank">{{ url.short_url }}</a></td>
+            </tr>
+            <tr>
+                <td>Creation Date</td>
+                <td>{{ url.created_date }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pt-5">
+        <a href="{{ url_for('update_url', id=url.id) }}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{{ url_for('delete_url', id=url.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </div>
+</div>
+</div>
+{% endblock %}

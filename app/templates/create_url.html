@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- Create URL Form -->
+<h1>Create URL</h1>
+<div class="py-5">
+    <form action="{{ url_for('create_url') }}" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input type="text" name="name" class="form-control" required>
+            <label class="form-label" for="url">Long URL</label>
+            <input type="url" name="url" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a href="{{ url_for('previous_page') }}"><button type="button" class="btn btn-danger">Cancel</button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

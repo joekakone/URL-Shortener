@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- Login -->
+<h1>Login</h1>
+
+<div class="py-5">
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input type="text" name="email" class="form-control" required>
+            <label class="form-label" for="password">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
