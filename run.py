@@ -2,7 +2,7 @@
 # coding : utf-8
 
 """
-    Flask CHallenge #02 : URL Shortner
+    Flask App : URL Shortner
 """
 
 from app import app
